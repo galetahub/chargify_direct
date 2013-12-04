@@ -8,7 +8,7 @@ module ChargifyDirect
 
     def connection_options
       @connection_options ||= {
-        request: { request: :url_encoded },
+        request: { params_encoder: ::Faraday::NestedParamsEncoder },
         builder: middleware,
         headers: {
           accept: MEDIA_TYPE,
@@ -18,7 +18,7 @@ module ChargifyDirect
     end
 
     def middleware
-      @middleware ||= ::Faraday::Builder.new do |builder|
+      @middleware ||= ::Faraday::RackBuilder.new do |builder|
         builder.use ChargifyDirect::Middleware::JsonBodyParser
         builder.adapter :em_http
       end

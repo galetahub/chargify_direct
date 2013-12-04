@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'faraday'
+  s.add_runtime_dependency 'faraday', '0.9.0.rc6'
   s.add_runtime_dependency 'multi_json'
 
   s.add_development_dependency 'rake'
