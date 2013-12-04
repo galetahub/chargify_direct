@@ -1,10 +1,14 @@
 require 'faraday'
 require 'chargify_direct/client'
 require 'chargify_direct/defaults'
+require 'chargify_direct/api/calls'
+require 'chargify_direct/api/sign_ups'
 
 module ChargifyDirect
   class ApiClient < Client
     include Defaults
+    include API::Calls
+    include API::SignUps
 
     def get(path, params = {})
       request(:get, path, params)
