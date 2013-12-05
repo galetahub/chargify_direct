@@ -3,6 +3,7 @@ require 'chargify_direct/request_parameters'
 module ChargifyDirect
   class Client
 
+    attr_reader   :request_parameters
     attr_accessor :api_id, :api_password, :api_secret
 
     def initialize(options = {}, &block)

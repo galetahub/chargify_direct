@@ -7,7 +7,7 @@ module ChargifyDirect
     include URIEncode
     include Signature
 
-    attr_reader :nonce, :signature, :data, :raw_data
+    attr_reader   :nonce, :signature, :data, :raw_data
     attr_accessor :api_id, :api_secret
 
     def initialize(api_id, api_secret, raw_data = {})
