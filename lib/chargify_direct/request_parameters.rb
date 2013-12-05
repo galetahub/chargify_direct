@@ -7,12 +7,11 @@ module ChargifyDirect
     include URIEncode
     include Signature
 
-    attr_reader   :nonce, :signature, :data, :raw_data
-    attr_accessor :api_id, :api_secret
+    attr_reader :nonce, :data, :raw_data, :api_id, :api_secret
 
     def initialize(api_id, api_secret, raw_data = {})
       api_id, api_secret, raw_data = api_id, api_secret, raw_data
-      generate_params
+      generate_signature
     end
 
     def timestamp
@@ -23,6 +22,14 @@ module ChargifyDirect
       raise ArgumentError, "Expected Hash, received #{hash.class}" unless hash.is_a? Hash
       @raw_data = hash
       @data = uri_encode_data(raw_data)
+    end
+
+    def nonce
+      @nonce = SecureRandom.uuid
+    end
+
+    def signature
+      generate_signature
     end
 
     def to_h
@@ -37,9 +44,8 @@ module ChargifyDirect
 
     private
 
-    def generate_params
-      @nonce = SecureRandom.uuid
-      @signature = generate_digest(api_secret, api_id, timestamp, nonce, uri_encoded_data)
+    def generate_signature
+      @signature = generate_digest(api_secret, api_id, @timestamp, @nonce, @data)
     end
   end
 end
