@@ -1,6 +1,7 @@
 require 'faraday'
 require 'chargify_direct/client'
 require 'chargify_direct/defaults'
+require 'chargify_direct/request_parameters'
 require 'chargify_direct/api/calls'
 require 'chargify_direct/api/sign_ups'
 

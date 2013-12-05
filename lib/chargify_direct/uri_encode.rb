@@ -2,11 +2,11 @@ require 'uri'
 
 module ChargifyDirect
   module URIEncode
-    def uri_encode
-      @url_encoded_data ||= build_nested_query(data)
-    end
-
     private
+
+    def uri_encode_data(raw_data)
+      build_nested_query(raw_data)
+    end
 
     def build_nested_query(value, prefix = nil)
       case value

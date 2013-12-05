@@ -1,3 +1,5 @@
+require 'chargify_direct/request_parameters'
+
 module ChargifyDirect
   class Client
 
@@ -8,6 +10,7 @@ module ChargifyDirect
         send(:"#{key}=", value)
       end
 
+      @request_parameters = RequestParameters.new(api_id, api_secret)
       yield self if block_given?
     end
 
