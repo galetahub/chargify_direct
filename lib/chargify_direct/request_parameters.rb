@@ -10,8 +10,7 @@ module ChargifyDirect
     attr_reader :nonce, :data, :raw_data, :api_id, :api_secret
 
     def initialize(api_id, api_secret, raw_data = {})
-      api_id, api_secret, raw_data = api_id, api_secret, raw_data
-      generate_signature
+      @api_id, @api_secret, raw_data = api_id, api_secret, raw_data
     end
 
     def timestamp

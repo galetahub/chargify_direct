@@ -5,7 +5,7 @@ module ChargifyDirect
     private
 
     def generate_digest(secret, *args)
-      message = args.join("")
+      message = args.map!(&:to_s).join("")
       sign(message, secret)
     end
 
