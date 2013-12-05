@@ -1,7 +1,7 @@
 require 'chargify_direct/version'
+require 'chargify_direct/error'
 require 'chargify_direct/api_client'
-require 'chargify_direct/api/calls'
-require 'chargify_direct/api/sign_ups'
+require 'chargify_direct/helpers/form_tag_helper'
 
 module ChargifyDirect
   if defined? ::ActionView::Helpers::FormTagHelper

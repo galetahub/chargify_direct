@@ -1,4 +1,5 @@
 require 'faraday'
+require 'chargify_direct/error/configuration_error'
 require 'chargify_direct/client'
 require 'chargify_direct/defaults'
 require 'chargify_direct/request_parameters'

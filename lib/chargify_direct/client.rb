@@ -2,7 +2,6 @@ require 'chargify_direct/request_parameters'
 
 module ChargifyDirect
   class Client
-
     attr_reader   :request_parameters
     attr_accessor :api_id, :api_password, :api_secret
 
@@ -11,8 +10,10 @@ module ChargifyDirect
         send(:"#{key}=", value)
       end
 
-      @request_parameters = RequestParameters.new(api_id, api_secret)
       yield self if block_given?
+      validate_credential_type!
+
+      @request_parameters = RequestParameters.new(api_id, api_secret)
     end
 
     def credentials
@@ -23,8 +24,17 @@ module ChargifyDirect
       }
     end
 
+    private
+
     def credentials?
       credentials.values.all?
+    end
+
+    def validate_credential_type!
+      credentials.each do |credential, value|
+        raise(Error::ConfigurationError, "api_id, api_secret and api_password must be specified.") unless credentials?
+        raise(Error::ConfigurationError, "Invalid #{credential} specified: #{value.inspect} must be a string or symbol.") unless value.is_a?(String) || value.is_a?(Symbol)
+      end
     end
   end
 end
